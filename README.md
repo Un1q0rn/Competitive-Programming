@@ -1,2 +1,2 @@
-# Competitive_Programming
+# Competitive Programming
 My competitive programming Solution.
