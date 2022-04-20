@@ -18,8 +18,7 @@ int root(int i){
     if(pa[i] == i) return i;
     return pa[i] = root(pa[i]);
 }
-int kruskal(){
-    int ans;
+void kruskal(){
     pa.resize(n+1);
     for(int i=1;i<=n;i++) pa[i]=i;
     while(!q.empty()){
@@ -29,7 +28,7 @@ int kruskal(){
         pa[root(u)] = pa[root(v)];
         if(root(s) == root(d)) {
             cout << ceil(p*1.0/(w-1));
-            return 0;
+            return;
         }
     }
 }
