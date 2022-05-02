@@ -17,7 +17,7 @@ int main() {
     int mxsum=INT_MIN;
     pair<int,int> pos;
     for(int i=1;i<=n;i++){
-        for(int j=i+1;j<=n;j++){
+        for(int j=i;j<=n;j++){
             if(mxsum < a[j]-a[i-1]){
                 mxsum = a[j]-a[i-1];
                 pos.f = i;
