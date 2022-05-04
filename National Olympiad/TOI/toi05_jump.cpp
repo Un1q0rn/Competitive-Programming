@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-
 #define ll long long int
 #define ld long double
 #define pi pair<int,int>
@@ -17,9 +16,8 @@ int main()
     for(auto &e:a) cin >> e;
     int ans = 0;
     for(int i=0;i<n;i++){
-        int a1 = upper_bound(a.begin(),a.end(),a[i])-a.begin();
         int a2 = upper_bound(a.begin(),a.end(),a[i]+k)-a.begin();
-        ans = max(ans,a2-a1);
+        ans = max(ans,a2-i-1);
     }
     cout << ans;
     return 0;
