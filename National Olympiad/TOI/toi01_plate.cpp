@@ -1,41 +1,47 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
+#define ll long long int
+#define ld long double
+#define pi pair<int,int>
+#define pb push_back
+#define all(x) x.begin(),x.end()
+#define f first
+#define s second 
 
-int a[10100],q[1010],fr,en;
-char opr;
-int main(){
-    int n,m,c,s,i,k;
-    cin >> n >> m;
-    while(m--){
-        cin >> c >> s;
-        a[s] = c;
+map<int,int> m;
+queue<int> q[11],r;
+int main()
+{
+    cin.tie(0)->sync_with_stdio(0);
+    int c,s;cin >> c >> s;
+    for(int i=0;i<s;i++){
+        int a,b;cin >> a >> b;
+        m[b] = a;
     }
     while(1){
-        cin >> opr;
+        char opr;cin >> opr;
         if(opr == 'X'){
-            cout << 0 << "\n";
-            return 0;
+            cout << 0 << '\n';
+            break;
         }
         if(opr == 'E'){
-            cin >> n;
-            k = en;
-            for(i=en-1;i>=fr;i--){
-                if(a[n] == a[q[i]]) {
-                    k = i+1;
-                    break;
-                }
-            }
-            for(i=en-1;i>=k;i--){
-                q[i+1] = q[i];
-            }
-            q[k] = n;
-            en++;
+            int n;cin >> n;
+            r.push(m[n]);
+            q[m[n]].push(n);
         }
         if(opr == 'D'){
-            if(fr == en){
+            if(r.empty()){
                 cout << "empty\n";
+                continue;
             }
-            else cout << q[fr++] << "\n";
+            int now = r.front();
+            while(q[now].empty() && !r.empty()){
+                r.pop();
+                now = r.front();
+            }
+            cout << q[now].front() << '\n';
+            q[now].pop();
+            if(q[now].empty()) r.pop();
         }
     }
     return 0;
