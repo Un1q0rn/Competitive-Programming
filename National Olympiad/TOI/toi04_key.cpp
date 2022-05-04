@@ -9,8 +9,6 @@ using namespace std;
 #define f first
 #define s second 
 
-map<int,int> m;
-queue<int> q[11],r;
 int main()
 {
     cin.tie(0)->sync_with_stdio(0);
