@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-
+using namespace std;
 int button(int p,int k){
     if(p == 2){
         char b[3] = {'A','B','C'};
@@ -42,10 +42,11 @@ int button(int p,int k){
         return b[k];
     }
 }
+
 int main()
 {
-    int n;scanf("%d",&n);
-    int p,k,s=1;scanf("%d %d",&p,&k);
+    int n;cin >> n;
+    int p,k,s=1;cin >> p >> k;
     int a[3][3];
     int ip,jp;
     char ans[100];
@@ -63,7 +64,7 @@ int main()
         ansp++;
     } 
     for(int i=0;i<n-1;i++){
-        int cj,ci,t;scanf("%d %d %d",&cj,&ci,&t);
+        int cj,ci,t;cin >> cj >> ci >> t;
         ip += ci;
         jp += cj;
         if(a[ip][jp] != 1){
@@ -72,7 +73,8 @@ int main()
         }
         else if(a[ip][jp] == 1) ansp=max(0,ansp-t);
     }
-    if(ansp > 0)for(int i=0;i<ansp;i++) printf("%c",ans[i]);
-    else printf("null");
+    if(ansp > 0)for(int i=0;i<ansp;i++) cout << ans[i];
+    else cout << "null";
     return 0;
 }
+
