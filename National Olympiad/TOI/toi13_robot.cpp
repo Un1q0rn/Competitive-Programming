@@ -27,7 +27,6 @@ int main()
     int ans = 0,cnt=0;
     while(!q.empty()){
         int ni = q.front().first,nj = q.front().second;
-        //cout << ni << ' ' << nj << '\n';
         q.pop();
         if(a[ni][nj] == 'A'){
             ans += dist[ni][nj];
