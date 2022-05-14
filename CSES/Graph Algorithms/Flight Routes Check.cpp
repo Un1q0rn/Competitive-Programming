@@ -36,18 +36,18 @@ int main()
         adj[u].pb(v);
         rev[v].pb(u);
     }
-    dfs1(n);
+    dfs1(1);
     for(int i=1;i<=n;i++){
         if(!visited[i]){
-            cout << "NO\n" << n << ' ' << i;
+            cout << "NO\n" << 1 << ' ' << i;
             return 0;
         }
     }
     memset(visited,0,sizeof visited);
-    dfs2(n);
+    dfs2(1);
     for(int i=1;i<=n;i++){
         if(!visited[i]){
-            cout << "NO\n" << i << ' ' << n;
+            cout << "NO\n" << i << ' ' << 1;
             return 0;
         }
     }
