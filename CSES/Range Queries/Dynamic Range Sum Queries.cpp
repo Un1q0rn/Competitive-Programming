@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#define ll long long
+
 template<class T>
 struct Segtree{
     T comp(T a,T b) {return a+b;}
