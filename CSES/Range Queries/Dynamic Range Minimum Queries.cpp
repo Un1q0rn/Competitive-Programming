@@ -3,8 +3,7 @@ using namespace std;
 
 #define ll long long int
 
-template<class T>
-struct Segtree{
+template<class T> struct Segtree{
     T comp(T a,T b) {return min(a,b);}
     const T DEFAULT = 1e18;
     vector<T> t;
