@@ -19,21 +19,21 @@ int main()
 {
     cin.tie(nullptr)->ios_base::sync_with_stdio(false);
     int n;cin >> n;
-    vector<vector<int>> a(n+1,vector<int>(n+1));
+    vector<vector<int>> dp(n+1,vector<int>(n+1));
     vector<vector<char>> grid(n+1,vector<char>(n+1));
     for(int i=1;i<=n;i++){
         for(int j=1;j<=n;j++){
             cin >> grid[i][j];
         }
     }
-    a[1][1] = (grid[1][1] != '*');
+    dp[1][1] = (grid[1][1] != '*');
     for(int i=1;i<=n;i++){
         for(int j=1;j<=n;j++){
             if(grid[i][j] == '*') continue;
-            a[i][j]+=a[i-1][j]+a[i][j-1];
-            a[i][j]%=MOD;
+            dp[i][j]+=dp[i-1][j]+dp[i][j-1];
+            dp[i][j]%=MOD;
         }
     }
-    cout << a[n][n];
+    cout << dp[n][n];
     return 0;
 }
