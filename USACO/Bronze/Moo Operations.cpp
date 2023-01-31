@@ -24,7 +24,7 @@ void setIO(string name = "") {
     }
 }
 int main() {
-    //setIO("sleepy");
+    setIO("");
     int q;cin >> q;
     while(q--){
         string s;cin >> s;
