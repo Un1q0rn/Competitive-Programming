@@ -64,7 +64,7 @@ void solve(){
     }
 }
 int main() {
-    //setIO("sleepy");
+    setIO("");
     cin >> N >> M;
     mark.resize(M);
     for(int i=0;i<N;i++){
