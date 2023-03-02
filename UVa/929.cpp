@@ -29,12 +29,13 @@ void solve(){
             cin >> a[i][j];
         }
     }
-    pq.push({1,1,0});
-    dist[1][1] = 0;
+    dist[1][1] = a[1][1];
+    pq.push({1,1,dist[1][1]});
     while(sz(pq)){
         int ni = pq.top().i,nj = pq.top().j,nw = pq.top().w;
         pq.pop();
-        if(dist[ni][nj] != nw) continue;
+        if(dist[ni][nj] < nw) continue;
+        if(ni == n && nj == m) break;
         for(int k=0;k<4;k++){
             int ii = ni+di[k],jj = nj+dj[k];
             if(ii < 1 || ii > n || jj < 1 || jj > m) continue;
@@ -43,7 +44,7 @@ void solve(){
             }
         }
     }
-    cout << dist[n][m] << '\n';
+    cout << dist[n][m] << endl;
 }
 int main()
 {
