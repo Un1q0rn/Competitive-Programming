@@ -28,7 +28,7 @@ void merge(int l,int mid,int r){
         }
         else{
             b[k++] = a[q++];
-            ans += (r-q+1);
+            ans += (mid-p+1);
         }
     }
     for(int i=0;i<k;i++){
