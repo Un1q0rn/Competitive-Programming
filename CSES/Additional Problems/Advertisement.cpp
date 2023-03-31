@@ -26,6 +26,9 @@ int main() {
         ans[i] += a[i]*(len-1);
         st.push(i);
     }
-    cout << *max_element(all(ans));
+    ll mx = 0;
+    for(auto e:ans) mx = max(mx,e);
+    cout << mx;
     return 0;
 }
+
