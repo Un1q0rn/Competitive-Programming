@@ -15,7 +15,6 @@ using pi = pair<int,int>;
 #define s second
 #define mp make_pair
 #define ll long long int
-#define ld long double
 
 void setIO(string name = "") {
     cin.tie(0)->sync_with_stdio(0); // see /general/fast-io
@@ -27,16 +26,16 @@ void setIO(string name = "") {
 int main() {
     setIO("time");
     int n,m,c;cin >> n >> m >> c;
+    vector<vector<int>>  dp(1010,vector<int>(n,-1)),adj(n);
     vector<int> a(n);
-    vector<vector<int>> adj(n);
     for(auto &e:a) cin >> e;
-    while(m--){
+    while(m--) {
         int u,v;cin >> u >> v;
-        adj[--u].pb(--v);
+        u--,v--;
+        adj[u].pb(v);
     }
-    vector<vector<int>> dp(1010,vector<int>(n,-1));
-    dp[0][0] = 0;
     int ans = 0;
+    dp[0][0] = 0;
     for(int i=0;i<=1000;i++){
         for(int u=0;u<n;u++){
             if(dp[i][u] == -1) continue;
@@ -46,6 +45,6 @@ int main() {
         }
         ans = max(ans,dp[i][0]-(c*i*i));
     }
-    cout << ans;
-    return 0; 
+    cout << ans << '\n';
+    return 0;
 }
