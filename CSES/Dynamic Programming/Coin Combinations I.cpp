@@ -1,32 +1,23 @@
-#include <bits/stdc++.h> 
-using namespace std; 
- 
-#define ll long long int 
-#define vi(x)  vector<x>
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define all(x) begin(x),end(x)
 #define pb push_back
-#define all(x) begin(x), end(x)
-#define sz(x) (int) (x).size()
- 
-using pi = pair<int,int>;
-#define f first
+#define sz(x) (int)x.size()
 #define s second
-#define mp make_pair
-ll gcd(ll a,ll b){
-    return b == 0 ? a:gcd(b,a%b);
-}
-const int MOD = 1e9+7;
-int main()
-{
-    cin.tie(nullptr)->ios_base::sync_with_stdio(false);
+#define f first
+
+const int M = 1e9+7;
+int main() {
+    cin.tie(0)->sync_with_stdio(0);
     int n,x;cin >> n >> x;
-    vector<int> a(n);
-    vector<int> dp(x+1);
+    vector<int> dp(x+1),a(n);
     for(auto &e:a) cin >> e;
     dp[0] = 1;
-    for(int i=0;i<=x;i++){
-        for(int j=0;j<n;j++){
-            if(i-a[j] >= 0) dp[i]+=dp[i-a[j]];
-            dp[i]%=MOD;
+    for(int i=1;i<=x;i++){
+        for(auto c:a){
+            if(i-c >= 0) dp[i] += dp[i-c];
+            dp[i] %= M;
         }
     }
     cout << dp[x];
