@@ -1,36 +1,23 @@
-#include <bits/stdc++.h> 
-using namespace std; 
- 
-#define ll long long int 
-#define vi(x)  vector<x>
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define all(x) begin(x),end(x)
 #define pb push_back
-#define all(x) begin(x), end(x)
-#define sz(x) (int) (x).size()
- 
-using pi = pair<int,int>;
-#define f first
+#define sz(x) (int)x.size()
 #define s second
-#define mp make_pair
-ll gcd(ll a,ll b){
-    return b == 0 ? a:gcd(b,a%b);
-}
-int main()
-{
-    cin.tie(nullptr)->ios_base::sync_with_stdio(false);
+#define f first
+
+int main() {
+    cin.tie(0)->sync_with_stdio(0);
     int n,x;cin >> n >> x;
-    vector<int> a(n);
-    vector<pair<int,int>> dp(x+1);
+    vector<int> dp(x+1,1e9),a(n);
     for(auto &e:a) cin >> e;
-    dp[0] = {1,0};
-    for(int i=0;i<=x;i++){
-        for(int j=0;j<n;j++){
-            if(i-a[j] >= 0 && dp[i-a[j]].first){
-                dp[i].first = 1;
-                if(dp[i].second == 0) dp[i].second = dp[i-a[j]].second+1;
-                else dp[i].second = min(dp[i].second,dp[i-a[j]].second+1);
-            }
+    dp[0] = 0;
+    for(int i=1;i<=x;i++){
+        for(auto c:a){
+            if(i-c >= 0) dp[i] = min(dp[i-c]+1,dp[i]);
         }
     }
-    cout << (dp[x].first ? dp[x].second:-1);
+    cout << (dp[x] == 1e9 ? -1:dp[x]);
     return 0;
 }
