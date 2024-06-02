@@ -1,32 +1,23 @@
 #include <bits/stdc++.h>
 using namespace std;
-
+ 
 #define ll long long int
 #define pi pair<int,int>
 #define pb push_back
-
+ 
 const int N = 1e5+10;
 vector<int> adj[N];
 vector<bool> visited(N,false);
-vector<pi> free_edge;
-int pa[N];
 void dfs(int u){
     visited[u] = true;
     for(auto v:adj[u]){
-        if(v == pa[u]) continue;
         if(!visited[v]){
-            pa[v] = u;
             dfs(v);
-        }
-        else{
-            if(v < u){
-                free_edge.pb({u,v});
-            }
         }
     }
     return;
 }
-
+ 
 int main()
 {
     cin.tie(0)->sync_with_stdio(0);
