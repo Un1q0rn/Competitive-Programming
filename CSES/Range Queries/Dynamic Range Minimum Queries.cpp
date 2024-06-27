@@ -1,48 +1,58 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define ll long long int
+const int N = 2e5;
+const int inf = 1e9;
+int a[N],s[N<<1];
 
-template<class T> struct Segtree{
-    T comp(T a,T b) {return min(a,b);}
-    const T DEFAULT = 1e18;
-    vector<T> t;
-    int n;
-    Segtree(int n) : t(2*n,DEFAULT),n(n){}
-    void set(int p,T val){
-        if(p < 0 || p >= n) return ;
-        for(t[p+=n] = val;p > 1;p>>=1){t[p >> 1] = comp(t[p],t[p^1]);}
+void build(int l,int r,int i){
+    if(l == r){
+        s[i] = a[l];
+        return ;
     }
-    T qry(int l,int r){
-        if(l < 0 || l >= n || r <= 0 || r < l) return 0;
-        T res = DEFAULT;
-        for(l+=n,r+=n;l < r;l >>= 1,r >>= 1){
-            if(l&1) res = comp(res,t[l++]);
-            if(r&1) res = comp(res,t[--r]);
+    int m = (l+r)>>1;
+    build(l,m,i*2+1);
+    build(m+1,r,i*2+2);
+    s[i] = min(s[i*2+1],s[i*2+2]);
+}
+int upd(int l,int r,int i,int x,int v){
+    if(x > r || x < l) return inf;
+    if(l == r){
+        return s[i] = v;
+    }
+    int m = (l+r)>>1;
+    upd(l,m,i*2+1,x,v);
+    upd(m+1,r,i*2+2,x,v);
+    return s[i] = min(s[i*2+1],s[i*2+2]);
+}
+
+int qry(int l,int r,int i,int lx,int rx){
+    if(r < lx || l > rx) return inf;
+    if(lx <= l && r <= rx){
+        return s[i];
+    }
+    int m = (l+r)>>1;
+    return min(qry(l,m,i*2+1,lx,rx),qry(m+1,r,i*2+2,lx,rx));
+}
+
+int main()
+{
+    cin.tie(0)->sync_with_stdio(0);
+    int n,m;cin >> n >> m;
+    for(int i=0;i<n;i++){
+        cin >> a[i];
+    }
+    build(0,n-1,0);
+    while(m--){
+        int t;cin >> t;
+        if(t == 1){
+            int i,v;cin >> i >> v;
+            upd(0,n-1,0,i-1,v);
         }
-        return res;
+        else{
+            int l,r;cin >> l >> r;
+            cout << qry(0,n-1,0,l-1,r-1) << '\n';
+        }
     }
-    
-};
-int main(){
-  ios::sync_with_stdio(false);
-  cin.tie(0);
-  int n,q;cin >> n >> q;
-  Segtree<ll> segtree(n);
-  for(int i=0;i<n;i++){
-      int x;cin >> x;
-      segtree.set(i,x);
-  }
-  while(q--){
-      int opr;cin >> opr;
-      if(opr == 1){
-          int k,u;cin >> k >> u;
-          segtree.set(k-1,u);
-      }
-      else{
-          int l,r;cin >> l >> r;
-          cout << segtree.qry(l-1,r) << '\n';
-      }
-  }
-  return 0;
+    return 0;
 }
