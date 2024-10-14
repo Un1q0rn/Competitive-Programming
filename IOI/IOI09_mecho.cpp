@@ -41,13 +41,9 @@ int main()
         }
     }
     int ans = -1;
-    int l = 0,r = n * n;
+    int l = 0,r = bdist[si][sj] - 1;
     while(l <= r){
         int mid = (l + r) >> 1;
-        if(bdist[si][sj] <= mid){
-            r = mid - 1;
-            continue;
-        }
         vector<vector<int>> dist(n + 1,vector<int>(n + 1,-1));
         queue<pair<int,int>> q;
         q.push({si,sj});
