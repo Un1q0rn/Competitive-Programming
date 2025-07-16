@@ -11,7 +11,7 @@ ll exp(ll x, ll n, ll m) {
 	while (n) {
 		if (n % 2) { res = res * x % m; }
 		x = x * x % m;
-		n <<= 1;
+		n >>= 1;
 	}
 	return res;
 }
