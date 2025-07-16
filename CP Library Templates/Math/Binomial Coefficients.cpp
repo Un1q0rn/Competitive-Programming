@@ -29,7 +29,10 @@ void inverses() {
 	for (int i = MAXN; i >= 1; i--) { inv[i - 1] = inv[i] * i % MOD; }
 }
 
-ll choose(int n, int r) { return fac[n] * inv[r] % MOD * inv[n - r] % MOD; }
+ll choose(int n, int r) { 
+	if(r > n) return 0;
+	return fac[n] * inv[r] % MOD * inv[n - r] % MOD; 
+}
 
 int main() {
 	factorial();
