@@ -30,7 +30,7 @@ void inverses() {
 }
 
 ll choose(int n, int r) { 
-	if(r > n) return 0;
+	if(r == 0 || r > n) return 0;
 	return fac[n] * inv[r] % MOD * inv[n - r] % MOD; 
 }
 
