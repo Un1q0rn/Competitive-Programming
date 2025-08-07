@@ -1,22 +1,25 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
 #define ll long long
-#define all(x) begin(x),end(x)
 #define sz(x) (int)x.size()
-#define ul unsigned long long
+#define all(x) begin(x), end(x)
 
-template<typename T>
+const int inf = 1e9;
+template<T>
 struct SegTree{
     int n;
-    T t[4 * n];
-    T inf;
-    function<T(T,T)> op;
-    SegTree(int sz,T val,function<T(T,T)> f){
-        memset(t,0,sizeof t);
-        n = sz;
-        inf = val;
-        op = f;
+    vector<T> t;
+    vector<T> a;
+    SegTree(vector<T>& s): a(s){
+        t.resize(4 * sz(a));
+        n = sz(a);
+        build(0,n-1,0);
+    }
+
+    void f(T a,T b){
+        return min(a,b);
     }
 
     void build(int l,int r,int i){
@@ -24,15 +27,15 @@ struct SegTree{
             t[i] = a[l];
             return ;
         }
-        int m = (l + r) >> 1;
+        int m = l + ((r - l) >> 1);
         int nl = i * 2 + 1;
         int nr = i * 2 + 2;
         build(l,m,nl);
         build(m + 1,r,nr);
-        t[i] = op(t[nl],t[nr]);
+        t[i] = f(t[nl],t[nr]);
     }
 
-    T upd(int l,int r,int i,int x,T v){
+    void upd(int l,int r,int i,int x,T v){
         if(l == r){
             s[i] = v;
             return ;
@@ -42,23 +45,30 @@ struct SegTree{
         int nr = i * 2 + 2;
         upd(l,m,nl,x,v);
         upd(m + 1,r,nr,x,v);
-        return t[i] = op(t[nl],t[nr]);
+        t[i] = f(t[nl],t[nr]);
     }
 
     T qry(int l,int r,int i,int lx,int rx){
         if(r < lx || l > rx) return inf;
-        if(lx <= l && rx <= r){
+        if(lx <= l && r <= rx){
             return t[i];
         }
-        int m = (l + r) >> 1;
+        int m = l + ((r - l) >> 1);
         int nl = i * 2 + 1;
         int nr = i * 2 + 2;
-        return op(qry(l,m,nl,lx,rx),qry(m + 1,r,nr,lx,rx));
+        return min(qry(l,m,nl,lx,rx,x),qry(m + 1,r,nr,lx,rx,x));
     }
 
 };
 
 int main() {
-    cin.tie(0)->sync_with_stdio(0);
+    cin.tie(nullptr)->ios_base::sync_with_stdio(false);
+    int n;cin >> n;
+    vector<int> a(n);
+    for(int i=0;i<n;i++){
+        cin >> a[i];
+    }
+
+    SegTree s(a);
     return 0;
 }
