@@ -7,7 +7,7 @@ using namespace std;
 #define all(x) begin(x), end(x)
 
 const int inf = 1e9;
-template<T>
+template<typename T>
 struct SegTree{
     int n;
     vector<T> t;
