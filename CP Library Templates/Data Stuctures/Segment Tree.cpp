@@ -10,15 +10,14 @@ const int inf = 1e9;
 template<typename T>
 struct SegTree{
     int n;
-    vector<T> t;
-    vector<T> a;
+    vector<T> t,a;
     SegTree(vector<T>& s): a(s){
-        t.resize(4 * sz(a));
         n = sz(a);
+        t.resize(4 * n);
         build(0,n-1,0);
     }
 
-    void merge(T a,T b){
+    T merge(T a,T b){
         return min(a,b);
     }
 
@@ -56,7 +55,7 @@ struct SegTree{
         int m = l + ((r - l) >> 1);
         int nl = i * 2 + 1;
         int nr = i * 2 + 2;
-        return min(qry(l,m,nl,lx,rx,x),qry(m + 1,r,nr,lx,rx,x));
+        return min(qry(l,m,nl,lx,rx),qry(m + 1,r,nr,lx,rx));
     }
 
 };
