@@ -18,7 +18,7 @@ struct SegTree{
         build(0,n-1,0);
     }
 
-    void f(T a,T b){
+    void merge(T a,T b){
         return min(a,b);
     }
 
@@ -32,7 +32,7 @@ struct SegTree{
         int nr = i * 2 + 2;
         build(l,m,nl);
         build(m + 1,r,nr);
-        t[i] = f(t[nl],t[nr]);
+        t[i] = merge(t[nl],t[nr]);
     }
 
     void upd(int l,int r,int i,int x,T v){
@@ -45,7 +45,7 @@ struct SegTree{
         int nr = i * 2 + 2;
         upd(l,m,nl,x,v);
         upd(m + 1,r,nr,x,v);
-        t[i] = f(t[nl],t[nr]);
+        t[i] = merge(t[nl],t[nr]);
     }
 
     T qry(int l,int r,int i,int lx,int rx){
