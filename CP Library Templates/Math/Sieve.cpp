@@ -12,7 +12,7 @@ void sieve() {
     for (int p = 2; p * p < MAXN; p++) {
         if (is_prime[p]) {
             for (int i = p * p; i < MAXN; i += p){
-                is_prime[p] = false;
+                is_prime[i] = false;
             }
         }
     }
