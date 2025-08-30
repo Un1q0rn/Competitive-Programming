@@ -5,9 +5,12 @@ using namespace std;
 template <class T>
 struct BIT{
     vector<T> f;
-    int size;
-    BIT(int n) :size(n), f(n+1){}
-  
+    int n;
+    BIT(int size) {
+        n = size;
+        f.resize(n + 1);
+    }
+
     void upd(int i,T v){
         i++;
         while(i <= n){
