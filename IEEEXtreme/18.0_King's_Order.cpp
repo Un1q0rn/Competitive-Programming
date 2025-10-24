@@ -33,7 +33,7 @@ void solve() {
 
     vector<int> ans;
     while(sz(pq)){
-        auto [g,u] = pq.top();
+        auto [_,u] = pq.top();
         pq.pop();
         ans.push_back(u);
         for(auto v:adj[u]){
